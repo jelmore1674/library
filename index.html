@@ -12,7 +12,27 @@
 </head>
 
 <body>
-    <script src="./app.js"></script>
+    <div class="nav" id="nav-bar">
+        <h1>My Library</h1>
+    </div>
+    <div id="bookEntry formDiv">
+        <form action="submit" id="bookEntry">
+            <div>
+                <label for="bookTitle">Title</label>
+                <input type="text" name="bookTitle" id="bookTitle" />
+            </div>
+            <div>
+                <label for="bookAuthor">Author</label>
+                <input type="text" name="bookAuthor" id="bookAuthor" />
+            </div>
+            <div>
+                <label for="pagesRead">Pages Read</label>
+                <input type="number" name="pagesRead" id="pagesRead" />
+            </div>
+            <div><button type="submit">Click Here</button></div>
+        </form>
+    </div>
+    <script src=" ./app.js "></script>
 </body>
 
 </html>
