@@ -1,0 +1,7 @@
+/** @format */
+
+*,
+*::before,
+*::after {
+    font-family: "Roboto Mono", monospace;
+}
