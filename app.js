@@ -45,7 +45,7 @@ function displayLibrary() {
         // let status = document.createElement("button");
 
         title.textContent = element.title;
-        author.textContent = element.author;
+        author.textContent = "Author:" + element.author;
         pages.textContent = element.pages + " pages";
         read.textContent = element.read; //? "Read" : "Not read yet";
         // //Data set for buttons and Event listeners
@@ -61,6 +61,7 @@ function displayLibrary() {
         // div.appendChild(remove);
         // div.appendChild(status);
         //--Styles
+        title.classList.add("title");
         // remove.classList.add("remove");
         // element.read ?
         //     status.classList.add("watched") :

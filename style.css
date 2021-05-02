@@ -5,3 +5,49 @@
 *::after {
     font-family: "Roboto Mono", monospace;
 }
+
+html body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e6e6ea;
+}
+
+.nav {
+    text-align: center;
+}
+
+#book-collection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    text-shadow: -0.5px -0.5px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#book-collection>.books {
+    color: #e6e6ea;
+    margin: 20px;
+    min-width: 240px;
+    max-width: 240px;
+    min-height: 280px;
+    max-height: 280px;
+    background: linear-gradient( to top, rgba(75, 29, 63, 0.6), rgba(23, 190, 187, 0.5));
+    border: 1px solid black;
+    border-radius: 20%;
+    box-shadow: 4px 4px rgba(90, 87, 102, 0.5), -4px -4px rgba(90, 87, 102, 0.5);
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+#book-collection>.books:hover {
+    transform: scale(1.05);
+    background: linear-gradient( to top, rgba(75, 29, 63, 0.7), rgba(23, 190, 187, 0.6));
+}
+
+#book-collection>.books>.title {
+    text-align: center;
+    font-size: 1.5rem;
+}
