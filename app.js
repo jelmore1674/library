@@ -71,6 +71,79 @@ function displayLibrary() {
         //-Append div to library
         library.appendChild(div);
     });
+    // Button for new book
+    let addBook = document.createElement("button");
+    library.appendChild(addBook);
+    addBook.setAttribute("ID", "add-book");
+    addBook.classList.add("add-button");
+    addBook = document.getElementById("add-book").innerHTML = "+";
+}
+
+function addForm() {
+    let popUp = document.getElementById("app-container");
+    let formContainer = document.createElement("div");
+    let titleDiv = document.createElement("div");
+    let form = document.createElement("form");
+    let titleLabel = document.createElement("label");
+    let title = document.createElement("input");
+    let authorDiv = document.createElement("div");
+    let authorLabel = document.createElement("label");
+    let authorInput = document.createElement("input");
+    let pagesDiv = document.createElement("div");
+    let pagesLabel = document.createElement("label");
+    let pagesInput = document.createElement("input");
+    let readDiv = document.createElement("div");
+    let readStatus = document.createElement("p");
+    let readLabel = document.createElement("label");
+    let readInput = document.createElement("input");
+    let notReadLabel = document.createElement("label");
+    let notReadInput = document.createElement("input");
+    let radioDiv = document.createElement("div");
+    let submitBtn = document.createElement("button");
+    formContainer.classList.add("form-container");
+    form.classList.add("form-box");
+    titleLabel.innerText = "Title";
+    titleDiv.id = "title-form";
+    titleDiv.appendChild(titleLabel);
+    titleDiv.appendChild(title);
+    form.appendChild(titleDiv);
+    authorLabel.innerText = "Author";
+    authorDiv.appendChild(authorLabel);
+    authorDiv.appendChild(authorInput);
+    authorDiv.id = "author-form";
+    form.appendChild(authorDiv);
+    pagesLabel.innerText = "Pages";
+    pagesDiv.appendChild(pagesLabel);
+    pagesDiv.appendChild(pagesInput);
+    pagesDiv.id = "pages-form";
+    form.appendChild(pagesDiv);
+    readStatus.innerText = "Finished the Book?";
+    readLabel.innerText = "Yes";
+    readInput.type = "radio";
+    readInput.setAttribute("name", "read");
+    readInput.setAttribute("value", true);
+    readInput.setAttribute("id:", "yes");
+    readLabel.setAttribute("for", "yes");
+    notReadInput.type = "radio";
+    notReadLabel.innerText = "No";
+    notReadInput.setAttribute("name", "read");
+    notReadInput.setAttribute("value", false);
+    notReadInput.setAttribute("id:", "no");
+    notReadLabel.setAttribute("for", "no");
+    radioDiv.classList.add("radio-container");
+    readDiv.appendChild(readStatus);
+    radioDiv.appendChild(readLabel);
+    radioDiv.appendChild(readInput);
+    radioDiv.appendChild(notReadLabel);
+    radioDiv.appendChild(notReadInput);
+    readDiv.appendChild(radioDiv);
+    readDiv.id = "read-form";
+    submitBtn.classList.add("form-btn");
+    submitBtn.innerText = "Add book to library";
+    form.appendChild(readDiv);
+    form.appendChild(submitBtn);
+    formContainer.appendChild(form);
+    popUp.appendChild(formContainer);
 }
 
 function removeBook(element) {
@@ -94,4 +167,5 @@ function changeStatus(element) {
 }
 
 displayLibrary();
+addForm();
 console.log(myLibrary);
