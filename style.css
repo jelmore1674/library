@@ -23,6 +23,10 @@ body {
     text-align: center;
 }
 
+.remove-element {
+    display: none;
+}
+
 .form-box {
     background-color: silver;
     max-width: 250px;
@@ -59,7 +63,13 @@ body {
 .radio-container {
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    margin-left: 40px;
+    max-width: 150px;
+    padding: 8px;
+}
+
+.form-text {
+    text-align: center;
 }
 
 .form-box>button {
