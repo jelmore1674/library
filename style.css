@@ -117,6 +117,16 @@ body {
     font-size: 1.5rem;
 }
 
+.rmBtn-list {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #e6e6ea;
+}
+
+.rmBtn-list:hover {
+    background-color: rgba(255, 0, 0, 0.9);
+    transform: scale(1.01);
+}
+
 #book-collection>.add-button {
     display: flex;
     margin: 20px;

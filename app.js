@@ -3,6 +3,18 @@
 //Place to store the array
 let myLibrary = [];
 
+let book1 = new Book("DOM Elements", "TOP", 99, true);
+let book2 = new Book("Roll Tide", "Justin", 55, false);
+
+manualAdd(book1);
+manualAdd(book2);
+
+function manualAdd(a) {
+    newBook = a;
+    if (myLibrary.some((book) => book.title === newBook.title)) return false;
+    myLibrary.push(newBook);
+}
+
 //Constructor for the books
 function Book(title, author, pages, read) {
     this.title = title;
@@ -18,24 +30,20 @@ function Book(title, author, pages, read) {
 
 //Function to add books to the library
 function addBookToLibrary() {
-    let title = document.getElementById("add-book").elements[0].value;
-    console.log(title);
-    let author = document.getElementById("add-book").elements[1].value;
-    let pages = Number(document.getElementById("add-book").elements[3].value);
+    let title = document.querySelector("#title").value;
+    let author = document.querySelector("#author").value;
+    let pages = document.querySelector("#pages").value;
     let read;
-    if (document.getElementById("add-book").elements[4].checked) {
-        read = true;
-    } else if (document.getElementById("add-book").elements[5].checked) {
-        read = false;
+    if (document.querySelector("#yes").checked) {
+        read = "Finished Book";
+    } else if (document.querySelector("no").checked) {
+        read = "Have not finished";
     }
     const book = new Book(title, author, pages, read); //Creates a new object inherited from Book
     myLibrary.push(book); //Adds new book to library
-    document.getElementById("form").remove();
-    updateLibrary();
+    document.getElementById("popup").remove();
+    displayLibrary();
 }
-
-let book1 = new Book("DOM Elements", "TOP", 99, true);
-let book2 = new Book("Roll Tide", "Justin", 55, false);
 
 function displayLibrary() {
     //Clear Display
@@ -49,7 +57,7 @@ function displayLibrary() {
         let author = document.createElement("p");
         let pages = document.createElement("p");
         let read = document.createElement("p");
-        // let remove = document.createElement("button");
+        let rm = document.createElement("button");
         // let status = document.createElement("button");
 
         title.textContent = element.title;
@@ -57,20 +65,21 @@ function displayLibrary() {
         pages.textContent = element.pages + " pages";
         read.textContent = element.read; //? "Read" : "Not read yet";
         // //Data set for buttons and Event listeners
-        // remove.dataset.ID = myLibrary.indexOf(element);
+        rm.dataset.ID = myLibrary.indexOf(element);
+        rm.innerText = "Delete from Library";
         // status.dataset.ID = myLibrary.indexOf(element);
-        // remove.addEventListener("click", removeBook);
+        rm.addEventListener("click", removeBook);
         // status.addEventListener("click", changeStatus);
         //--Append elements to div
         div.appendChild(title);
         div.appendChild(author);
         div.appendChild(pages);
         div.appendChild(read);
-        // div.appendChild(remove);
+        div.appendChild(rm);
         // div.appendChild(status);
         //--Styles
         title.classList.add("title");
-        // remove.classList.add("remove");
+        rm.classList.add("rmBtn-list");
         // element.read ?
         //     status.classList.add("watched") :
         //     status.classList.add("watch"); // If read it adds class "watched" if not it adds class "watch"
@@ -87,7 +96,12 @@ function displayLibrary() {
     addBook = document.getElementById("add-book").innerHTML = "+";
     addBook = document
         .getElementById("add-book")
-        .addEventListener("click", addForm);
+        .addEventListener("click", function() {
+            let popup = document.createElement("div");
+            popup.id = "popup";
+            document.getElementById("app-container").appendChild(popup);
+            addForm();
+        });
 }
 
 function addForm() {
@@ -206,8 +220,8 @@ function addForm() {
 function removeBook(element) {
     //Remove book from library
     myLibrary.splice(element.target.dataset.ID, 1); //Gets the element ID and removes it from myLibrary
-    updateLibrary(); //Refresh the library display
-    writeUserData(); //Write data to firebase, if logged in
+    displayLibrary(); //Refresh the library display
+    // writeUserData(); //Write data to firebase, if logged in
 }
 
 function changeStatus(element) {
@@ -219,7 +233,7 @@ function changeStatus(element) {
         //If the book is "not read" pressing the button change it to "read"
         myLibrary[element.target.dataset.ID].read = true;
     }
-    updateLibrary(); //Refresh the library display
+    displayLibrary(); //Refresh the library display
     writeUserData(); //Write data to firebase, if logged in
 }
 
