@@ -36,7 +36,7 @@ function addBookToLibrary() {
     let read;
     if (document.querySelector("#yes").checked) {
         read = "Finished Book";
-    } else if (document.querySelector("no").checked) {
+    } else if (document.querySelector("#no").checked) {
         read = "Have not finished";
     }
     const book = new Book(title, author, pages, read); //Creates a new object inherited from Book
@@ -49,45 +49,59 @@ function displayLibrary() {
     //Clear Display
     const library = document.getElementById("book-collection");
     library.textContent = "";
-    // Create the stuff to be displayed
-    myLibrary.forEach((element) => {
-        //-- First Step Create elements
-        let div = document.createElement("div");
-        let title = document.createElement("h2");
-        let author = document.createElement("p");
-        let pages = document.createElement("p");
-        let read = document.createElement("p");
-        let rm = document.createElement("button");
-        // let status = document.createElement("button");
 
-        title.textContent = element.title;
-        author.textContent = "Author:" + element.author;
-        pages.textContent = element.pages + " pages";
-        read.textContent = element.read; //? "Read" : "Not read yet";
-        // //Data set for buttons and Event listeners
-        rm.dataset.ID = myLibrary.indexOf(element);
-        rm.innerText = "Delete from Library";
-        // status.dataset.ID = myLibrary.indexOf(element);
-        rm.addEventListener("click", removeBook);
-        // status.addEventListener("click", changeStatus);
-        //--Append elements to div
-        div.appendChild(title);
-        div.appendChild(author);
-        div.appendChild(pages);
-        div.appendChild(read);
-        div.appendChild(rm);
-        // div.appendChild(status);
-        //--Styles
-        title.classList.add("title");
-        rm.classList.add("rmBtn-list");
-        // element.read ?
-        //     status.classList.add("watched") :
-        //     status.classList.add("watch"); // If read it adds class "watched" if not it adds class "watch"
-        // status.classList.add("status");
-        div.classList.add("books");
-        //-Append div to library
-        library.appendChild(div);
-    });
+    if (myLibrary.length < 1) {
+        let div = document.createElement("div");
+        let p = document.createElement("p");
+        p.innerText = "You library is empty";
+        library.appendChild(p);
+    }
+    // Create the stuff to be displayed
+    else {
+        myLibrary.forEach((element) => {
+            //-- First Step Create elements
+            let div = document.createElement("div");
+            let title = document.createElement("h2");
+            let author = document.createElement("p");
+            let pages = document.createElement("p");
+            let read = document.createElement("p");
+            let btnDiv = document.createElement("div");
+            let rm = document.createElement("button");
+            let status = document.createElement("button");
+
+            title.textContent = element.title;
+            author.textContent = "Author: " + element.author;
+            pages.textContent = element.pages + " pages";
+            read.textContent = element.read ? "Finished" : "Not read yet";
+            // //Data set for buttons and Event listeners
+            rm.dataset.ID = myLibrary.indexOf(element);
+            rm.innerText = "Delete from Library";
+            status.innerText = "Finished Book";
+            status.classList.add("status-btn");
+            status.dataset.ID = myLibrary.indexOf(element);
+            rm.addEventListener("click", removeBook);
+            status.addEventListener("click", changeStatus);
+            btnDiv.classList.add("btnDiv");
+            btnDiv.appendChild(status);
+            btnDiv.appendChild(rm);
+            //--Append elements to div
+            div.appendChild(title);
+            div.appendChild(author);
+            div.appendChild(pages);
+            div.appendChild(read);
+            div.appendChild(btnDiv);
+            //--Styles
+            title.classList.add("title");
+            rm.classList.add("rmBtn-list");
+            // element.read ?
+            //     status.classList.add("watched") :
+            //     status.classList.add("watch"); // If read it adds class "watched" if not it adds class "watch"
+            // status.classList.add("status");
+            div.classList.add("books");
+            //-Append div to library
+            library.appendChild(div);
+        });
+    }
     // Button for new book
     let addBook = document.createElement("button");
     library.appendChild(addBook);
@@ -169,7 +183,7 @@ function addForm() {
     notReadInput.type = "radio";
     notReadLabel.innerText = "No";
     notReadInput.setAttribute("name", "read");
-    notReadInput.setAttribute("value", "no");
+    notReadInput.setAttribute("value", false);
     notReadInput.id = "no";
     notReadLabel.setAttribute("for", "no");
     selectDiv.classList.add("radio-container");
@@ -188,6 +202,7 @@ function addForm() {
     submitBtn.innerText = "Add book to library";
     //Removed Element
     let rmBtn = document.createElement("button");
+    rmBtn.classList.add("form-rmBtn");
     rmBtn.innerText = "Exit";
     rmBtn.setAttribute("type", "button");
     rmBtn.addEventListener("click", () =>

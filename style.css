@@ -3,7 +3,7 @@
 *,
 *::before,
 *::after {
-    font-family: "Roboto Mono", monospace;
+    font-family: "Roboto", monospace;
 }
 
 html body {
@@ -12,15 +12,22 @@ html body {
 }
 
 button {
+    border: none;
+    outline-style: none;
     outline: none;
 }
 
 body {
-    background-color: #e6e6ea;
+    background-image: url("./images/space.jpeg");
+    background-size: cover;
+    background-blend-mode: multiply;
 }
 
 .nav {
+    margin-top: 0;
+    padding: 10px;
     text-align: center;
+    background-color: rgba(230, 230, 234, 0.7);
 }
 
 .remove-element {
@@ -29,6 +36,7 @@ body {
 
 .form-box {
     background-color: silver;
+    border-radius: 5%;
     max-width: 250px;
     min-width: 250px;
     margin: 25% auto;
@@ -72,24 +80,52 @@ body {
     text-align: center;
 }
 
-.form-box>button {
+.form-btn {
     background-color: rgba(75, 29, 63, 0.9);
     color: #e6e6ea;
     font-size: 1rem;
-    padding: 30px;
+    padding: 20px;
+    border-radius: 500px;
+    margin-top: 5px;
 }
 
-.form-box>button:hover {
+.form-btn:hover {
     transform: scale(1.01);
     background-color: rgba(75, 29, 63, 0.8);
 }
 
+.form-rmBtn {
+    background-color: rgba(191, 6, 3, 0.9);
+    color: #e6e6ea;
+    font-size: 1rem;
+    padding: 20px;
+    border-radius: 500px;
+    margin-top: 10px;
+}
+
+.form-rmBtn:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+    transform: scale(1.01);
+}
+
 #book-collection {
+    background-color: rgba(230, 230, 234, 0.1);
+    height: 84vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 10px;
     text-shadow: -0.5px -0.5px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#book-collection>p {
+    text-align: center;
+    max-height: 40px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #e6e6ea;
+    font-size: 1.3rem;
 }
 
 #book-collection>.books {
@@ -119,12 +155,34 @@ body {
 
 .rmBtn-list {
     background-color: rgba(255, 0, 0, 0.8);
+    margin-top: 8px;
+    outline: none;
+    border-radius: 500px;
+    padding: 5px;
     color: #e6e6ea;
 }
 
 .rmBtn-list:hover {
     background-color: rgba(255, 0, 0, 0.9);
     transform: scale(1.01);
+}
+
+.status-btn {
+    background-color: rgba(0, 255, 0, 0.8);
+    padding: 5px;
+    border-radius: 500px;
+}
+
+.status-btn:hover {
+    background-color: rgba(0, 255, 0, 0.9);
+    transform: (scale(1.01));
+}
+
+.btnDiv {
+    display: flex;
+    flex-direction: column;
+    max-width: 180px;
+    margin: 10px auto;
 }
 
 #book-collection>.add-button {
@@ -140,7 +198,7 @@ body {
     min-width: 240px;
     max-height: 140px;
     max-width: 240px;
-    border-radius: 20%;
+    border-radius: 500px;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -151,15 +209,13 @@ body {
     background-color: rgba(191, 6, 3, 0.8);
 }
 
-.form-container {
-    display: block;
-    position: fixed;
-    z-index: 8;
-    left: 0;
-    top: 0;
+#popup {
+    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
