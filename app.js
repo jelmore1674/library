@@ -1,5 +1,30 @@
 /** @format */
 
+// Firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyAE0RA9AWzgNM6SW-UyeUkEUce6aD8kew0",
+    authDomain: "mylibrary-4f6ea.firebaseapp.com",
+    projectId: "mylibrary-4f6ea",
+    storageBucket: "mylibrary-4f6ea.appspot.com",
+    messagingSenderId: "959508742705",
+    appId: "1:959508742705:web:71917e3eef9b355efa0b10",
+    measurementId: "G-H80PMBZHQJ",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+ui.start("#firebaseui-auth-container", {
+    signInOptions: [
+        // List of OAuth providers supported.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    ],
+    // Other config options...
+});
+
 //Place to store the array
 let myLibrary = [];
 

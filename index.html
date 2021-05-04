@@ -11,17 +11,26 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
 </head>
 
 <body>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-firestore.js"></script>
     <div id="app-container">
-        <div class="nav" id="nav-bar">
-            <h1>My Library</h1>
-        </div>
-        <div id="book-collection"></div>
-    </div>
+        <div id="login">
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
 
-    <script src=" ./app.js "></script>
+            <div class="nav" id="nav-bar">
+                <h1>My Library</h1>
+            </div>
+            <div id="book-collection"></div>
+        </div>
+
+        <script src=" ./app.js "></script>
 </body>
 
 </html>

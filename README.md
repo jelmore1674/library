@@ -14,3 +14,8 @@ will be using HTML,CSS,JS,and Firebase. The link to the project guidelines
 ### Update 1
 
 Got it working sort of. Now I am able to display the array in a div!
+
+### Update 2
+
+Main part of the project is complete. I am now able to add books, remove books,
+and have everything styled. Now I am currently trying to setup Firebase.
