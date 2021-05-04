@@ -53,6 +53,37 @@ function Book(title, author, pages, read) {
     };
 }
 
+//localStorage setup
+// Get Local Library
+function localGetBooks() {
+    let myLibrary;
+    if (localStorage.getItem(Book) === null) {
+        myLibrary = [];
+    } else {
+        myLibrary = JSON.parse(localStorage.getItem(Book));
+    }
+
+    return myLibrary;
+}
+// Save
+function localAddBook(book) {
+    const myLibrary = localGetBooks();
+    myLibrary.push(book);
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+// Remove Book
+function localRemoveBook(title) {
+    const myLibrary = localGetBooks();
+
+    myLibrary.forEach((book, index) => {
+        if (book.title === title) {
+            books.splice(index, 1);
+        }
+    });
+    localStorage.setItem("books", JSON.stringify(books));
+}
+
 //Function to add books to the library
 function addBookToLibrary() {
     let title = document.querySelector("#title").value;
@@ -67,6 +98,7 @@ function addBookToLibrary() {
     const book = new Book(title, author, pages, read); //Creates a new object inherited from Book
     myLibrary.push(book); //Adds new book to library
     document.getElementById("popup").remove();
+    localAddBook();
     displayLibrary();
 }
 
@@ -74,6 +106,7 @@ function displayLibrary() {
     //Clear Display
     const library = document.getElementById("book-collection");
     library.textContent = "";
+    localGetBooks();
 
     if (myLibrary.length < 1) {
         let div = document.createElement("div");
@@ -260,7 +293,9 @@ function addForm() {
 function removeBook(element) {
     //Remove book from library
     myLibrary.splice(element.target.dataset.ID, 1); //Gets the element ID and removes it from myLibrary
-    displayLibrary(); //Refresh the library display
+    displayLibrary();
+    localRemoveBook();
+    //Refresh the library display
     // writeUserData(); //Write data to firebase, if logged in
 }
 
