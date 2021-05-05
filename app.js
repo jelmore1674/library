@@ -1,13 +1,19 @@
 /** @format */
 
-let myLibrary = loadLibrary();
+let testData = [{
+    title: 'Remove this and Add Books to Your Library',
+    author: 'Justin Elmore',
+    pages: 99,
+    read: false,
+}, ];
+
+let myLibrary = [];
 // Get Local Library
 function loadLibrary() {
-    let myLibrary = JSON.parse(localStorage.getItem('library'));
-    if (myLibrary.length < 1) {
-        return (myLibrary = []);
+    if (localStorage.getItem('library')) {
+        myLibrary = JSON.parse(localStorage.getItem('library'));
     } else {
-        return myLibrary;
+        myLibrary = testData;
     }
 }
 
@@ -55,6 +61,8 @@ function addBookToLibrary() {
 }
 
 function displayLibrary() {
+    // Local Storage
+    loadLibrary();
     //Clear Display
     const library = document.getElementById('book-collection');
     library.textContent = '';
