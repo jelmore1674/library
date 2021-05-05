@@ -1,38 +1,7 @@
 /** @format */
 
-// Firebase
-var firebaseConfig = {
-    apiKey: "AIzaSyAE0RA9AWzgNM6SW-UyeUkEUce6aD8kew0",
-    authDomain: "mylibrary-4f6ea.firebaseapp.com",
-    projectId: "mylibrary-4f6ea",
-    storageBucket: "mylibrary-4f6ea.appspot.com",
-    messagingSenderId: "959508742705",
-    appId: "1:959508742705:web:71917e3eef9b355efa0b10",
-    measurementId: "G-H80PMBZHQJ",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-ui.start("#firebaseui-auth-container", {
-    signInOptions: [
-        // List of OAuth providers supported.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    ],
-    // Other config options...
-});
-
-//Place to store the array
-let myLibrary = [];
-
-let book1 = new Book("DOM Elements", "TOP", 99, true);
-let book2 = new Book("Roll Tide", "Justin", 55, false);
-
-manualAdd(book1);
-manualAdd(book2);
+// Get Local Library
+let myLibrary = JSON.parse(localStorage.getItem("library"));
 
 function manualAdd(a) {
     newBook = a;
@@ -54,34 +23,9 @@ function Book(title, author, pages, read) {
 }
 
 //localStorage setup
-// Get Local Library
-function localGetBooks() {
-    let myLibrary;
-    if (localStorage.getItem(Book) === null) {
-        myLibrary = [];
-    } else {
-        myLibrary = JSON.parse(localStorage.getItem(Book));
-    }
-
-    return myLibrary;
-}
-// Save
-function localAddBook(book) {
-    const myLibrary = localGetBooks();
-    myLibrary.push(book);
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-}
-
-// Remove Book
-function localRemoveBook(title) {
-    const myLibrary = localGetBooks();
-
-    myLibrary.forEach((book, index) => {
-        if (book.title === title) {
-            books.splice(index, 1);
-        }
-    });
-    localStorage.setItem("books", JSON.stringify(books));
+function saveLibrary() {
+    let savedLibrary = JSON.stringify(myLibrary);
+    localStorage.setItem("library", savedLibrary);
 }
 
 //Function to add books to the library
@@ -98,7 +42,7 @@ function addBookToLibrary() {
     const book = new Book(title, author, pages, read); //Creates a new object inherited from Book
     myLibrary.push(book); //Adds new book to library
     document.getElementById("popup").remove();
-    localAddBook();
+    saveLibrary();
     displayLibrary();
 }
 
@@ -106,10 +50,7 @@ function displayLibrary() {
     //Clear Display
     const library = document.getElementById("book-collection");
     library.textContent = "";
-    localGetBooks();
-
     if (myLibrary.length < 1) {
-        let div = document.createElement("div");
         let p = document.createElement("p");
         p.innerText = "You library is empty";
         library.appendChild(p);
@@ -126,7 +67,6 @@ function displayLibrary() {
             let btnDiv = document.createElement("div");
             let rm = document.createElement("button");
             let status = document.createElement("button");
-
             title.textContent = element.title;
             author.textContent = "Author: " + element.author;
             pages.textContent = element.pages + " pages";
@@ -148,13 +88,8 @@ function displayLibrary() {
             div.appendChild(pages);
             div.appendChild(read);
             div.appendChild(btnDiv);
-            //--Styles
             title.classList.add("title");
             rm.classList.add("rmBtn-list");
-            // element.read ?
-            //     status.classList.add("watched") :
-            //     status.classList.add("watch"); // If read it adds class "watched" if not it adds class "watch"
-            // status.classList.add("status");
             div.classList.add("books");
             //-Append div to library
             library.appendChild(div);
@@ -266,7 +201,6 @@ function addForm() {
     rmBtn.addEventListener("click", () =>
         document.getElementById("popup").remove()
     );
-    //Remove form if pressed
     //Add Elements to Form
     form.appendChild(titleDiv);
     form.appendChild(authorDiv);
@@ -274,7 +208,6 @@ function addForm() {
     form.appendChild(radioDiv);
     form.appendChild(submitBtn);
     form.appendChild(rmBtn);
-
     //event listeners
     titleDiv.addEventListener("click", () => {
         title.focus();
@@ -285,18 +218,15 @@ function addForm() {
     pagesDiv.addEventListener("click", () => {
         pagesInput.focus();
     });
-
     formContainer.appendChild(form);
     document.getElementById("popup").appendChild(formContainer);
 }
 
 function removeBook(element) {
     //Remove book from library
-    myLibrary.splice(element.target.dataset.ID, 1); //Gets the element ID and removes it from myLibrary
+    myLibrary.splice(element.target.dataset.ID, 1);
+    saveLibrary();
     displayLibrary();
-    localRemoveBook();
-    //Refresh the library display
-    // writeUserData(); //Write data to firebase, if logged in
 }
 
 function changeStatus(element) {
@@ -308,9 +238,8 @@ function changeStatus(element) {
         //If the book is "not read" pressing the button change it to "read"
         myLibrary[element.target.dataset.ID].read = true;
     }
-    displayLibrary(); //Refresh the library display
-    writeUserData(); //Write data to firebase, if logged in
+    displayLibrary();
+    saveLibrary();
 }
 
 displayLibrary();
-console.log(myLibrary);

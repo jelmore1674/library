@@ -19,3 +19,8 @@ Got it working sort of. Now I am able to display the array in a div!
 
 Main part of the project is complete. I am now able to add books, remove books,
 and have everything styled. Now I am currently trying to setup Firebase.
+
+### Update 3
+
+Project Complete. Works with local storage, still wnat to setup firebase for
+cloud and realtime database experience.
