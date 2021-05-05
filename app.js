@@ -62,7 +62,7 @@ function addBookToLibrary() {
 
 function displayLibrary() {
     // Local Storage
-    loadLibrary();
+    // loadLibrary();
     //Clear Display
     const library = document.getElementById('book-collection');
     library.textContent = '';
@@ -179,7 +179,7 @@ function addForm() {
     readLabel.innerText = 'Yes';
     readInput.type = 'radio';
     readInput.setAttribute('name', 'read');
-    readInput.setAttribute('value', 'yes');
+    readInput.setAttribute('value', true);
     readInput.id = 'yes';
     readLabel.setAttribute('for', 'yes');
     notReadInput.type = 'radio';
@@ -247,8 +247,8 @@ function changeStatus(element) {
         //If the book is "not read" pressing the button change it to "read"
         myLibrary[element.target.dataset.ID].read = true;
     }
-    displayLibrary();
     saveLibrary();
+    displayLibrary();
 }
-
+loadLibrary();
 displayLibrary();
