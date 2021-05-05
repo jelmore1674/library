@@ -1,7 +1,15 @@
 /** @format */
 
+let myLibrary = loadLibrary();
 // Get Local Library
-let myLibrary = JSON.parse(localStorage.getItem('library'));
+function loadLibrary() {
+    let myLibrary = JSON.parse(localStorage.getItem('library'));
+    if (myLibrary.length < 1) {
+        return (myLibrary = []);
+    } else {
+        return myLibrary;
+    }
+}
 
 function manualAdd(a) {
     newBook = a;
